@@ -19,3 +19,22 @@ export const formatTimeDistance = (createdAt) => {
       return `${seconds}s ago`;
     }
   };
+
+export const debounce = (func, delay = 1000) => {
+  let timeoutId;
+
+  return (...args) => {
+    return new Promise((resolve, reject) => {
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        try {
+          const result = func(...args);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      }, delay);
+    });
+  };
+};
