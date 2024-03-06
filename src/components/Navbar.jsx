@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import noDP from '../assets/noDP.png';
 import logo from '../assets/fzlogo.jpg'
+import { Link } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import { useGlobal } from "../context/globalContext";
+import { fetchUser } from "../api/fetchUser";
 import useGetUser from "../hooks/useGetUser";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = true; // Replace with your logic to check if the user is logged in
 
-  const {user} = useGetUser();
+const Navbar = () => {
+  const {logout} = useGlobal(); //fetch user
+  const {user} = useGetUser()
+  const [isOpen, setIsOpen] = useState(false);
+
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
+
+console.log("user is ======================== ",localStorage.getItem('user'))
   return (
-    <nav className="bg-blue-500 p-4 w-full relative">
+    <nav className="bg-blue-500 p-4 w-full relative z-[998]">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className={`w-8 h-8 400 mr-2 overflow-hidden `}>
@@ -33,16 +40,19 @@ const Navbar = () => {
             onClick={toggleNavbar}
             className="text-white text-2xl cursor-pointer absolute top-4 right-4"
           />
-          <div className={`mx-auto flex flex-col items-start mt-16 w-40`}>
-            {isLoggedIn &&(<>
+          <div className={`mx-auto flex flex-col items-start mt-16 w-40 text-white`}>
+            {user ? (<>
             <img className="h-10 w-10 rounded-full absolute top-4 left-4" src={user?.img? user.img : noDP} alt="DP" />
-              <a
-                href="#"
-                className="text-white mb-6 ml-4 mt-6 transition-all duration-300 hover:font-bold"
+              <p className=" ml-4 my-4 font-medium">({user.name})</p>
+              <Link
+                to="/login" onClick={(e)=>{logout()}}
+                className="flex justify-center items-center mb-6 ml-4 transition-all duration-300 font-semibold hover:underline"
               >
-                Logout
-              </a>
-              </>)}
+                <FiLogOut className="mr-1"/>Logout
+              </Link>
+              </>) : (
+                <Link className="ml-4 mb-6" to="/login">Please login</Link>
+              )}
           </div>
         </div>
 

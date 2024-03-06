@@ -36,7 +36,7 @@ const Card = forwardRef(({ title, createdAt, content, user }, ref) => {
         <p className="text-gray-700 mt-2 border-b pb-4">{content}</p>
       </div>
 
-      <div className="flex justify-center gap-[30%] items-center mt-2">
+      <div className="flex justify-center gap-[30%] items-center mt-2 text-gray-600">
         <span
           title="Dummy like"
           className="flex justify-center items-center gap-2 text-lg cursor-pointer hover:scale-105"

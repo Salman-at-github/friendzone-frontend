@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchUser = async(signal)=>{
+export const fetchUser = async()=>{
     try {
     
         const response = await axios({
@@ -8,10 +8,10 @@ export const fetchUser = async(signal)=>{
           url: 'http://localhost:3030/api/users/get',
           headers: {
             'Authorization': localStorage.getItem('token')
-          },
-          signal
+          }
         });
         console.log(response.data)
+        console.log("Statuu =========================== ",response.status)
         return response.data;
       } catch (error) {
         throw error; // Throw the error for the calling hook to handle

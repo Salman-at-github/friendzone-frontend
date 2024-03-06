@@ -38,3 +38,20 @@ export const debounce = (func, delay = 1000) => {
     });
   };
 };
+
+export const generateRandomId = (length = 8) => {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let randomId = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomId += characters.charAt(randomIndex);
+  }
+
+  return randomId;
+}
+
+export const getCurrentTime = () => {
+  const currentTime = new Date().toISOString();
+  return currentTime;
+}

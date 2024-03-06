@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { login } from "../../api/login";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchUser } from "../../api/fetchUser";
+import { useGlobal } from "../../context/globalContext";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -22,15 +24,21 @@ const Form = () => {
 
   const navigateTo = useNavigate()
 
+  const {setUser} = useGlobal()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         const token = await login(formData.email, formData.password)
-        console.log("🚀 ~ handleSubmit ~ token:", token)
         
         if(token){
             localStorage.setItem('token',token);
-            navigateTo("/")
+            const gotUser = await fetchUser()
+            if(gotUser){
+              setUser(gotUser)
+              localStorage.setItem('user',gotUser)
+              navigateTo("/")
+            }
         }
     } catch (error) {
         throw error
@@ -39,10 +47,10 @@ const Form = () => {
 
   return (
     <form
-      className="mx-auto p-8 bg-white rounded shadow-md mt-8 border"
+      className="mx-auto p-8 md:w-96 bg-white rounded shadow-md mt-8 border"
       onSubmit={handleSubmit}
     >
-
+      <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
       {/* Email Field */}
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -88,11 +96,13 @@ const Form = () => {
 
       {/* Submit Button */}
       <button
+        disabled={!formData.email || !formData.password}
         type="submit"
         className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
       >
         Login
       </button>
+      <p className="mt-8 ">Don't an account? <Link to="/signup" className="text-blue-500 font-semibold">Sign up </Link>here</p>
     </form>
   );
 };

@@ -6,8 +6,6 @@ const Loading = () => {
     <>
         <CardSkeleton/>
         <CardSkeleton/>
-        <CardSkeleton/>
-        <CardSkeleton/>
     </>
   )
 }

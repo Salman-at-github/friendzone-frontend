@@ -3,7 +3,7 @@ import axios from "axios";
 export const getPosts = async (page = 1, limit = 5, signal, token) => {
   try {
     // Simulate a delay of 3 seconds
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const response = await axios({
       method: "GET",

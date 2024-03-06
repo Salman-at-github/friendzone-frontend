@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { getPosts } from "../api/fetchPosts";
+import { generateRandomId, getCurrentTime } from "../utils/helpers";
+import { useGlobal } from "../context/globalContext";
 
 export default function useGetPosts(page = 1, limit = 5){
 
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false)
     const [error, setError ] = useState({});
-    const [posts, setPosts] = useState([]);
     const [hasMore, setHasMore] = useState(false)
-
+    
+    const {posts, setPosts} = useGlobal()
+    
     useEffect(()=>{
         setLoading(true);
         setIsError(false);
@@ -34,5 +37,17 @@ export default function useGetPosts(page = 1, limit = 5){
 
     },[page]);
 
-    return {loading,isError, error,posts,hasMore}
+    const addPostLocally = (title, content, userID) => {
+        const newPost = {
+            _id: generateRandomId(),
+            title: title,
+            content: content,
+            user: userID,
+            createdAt: getCurrentTime()
+        };
+        setPosts(prevPosts => [newPost, ...prevPosts]);
+    
+    };
+
+    return {loading,isError, error,posts,hasMore, addPostLocally}
 }

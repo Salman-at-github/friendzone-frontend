@@ -3,8 +3,7 @@ import LoginForm from '../components/forms/LoginForm'
 
 const Login = () => {
   return (
-    <div className='h-full md:min-h-screen flex justify-center items-center flex-col my-20 md:my-4'>
-        <h2 className='text-2xl font-bold'>Login</h2>
+    <div className='md:min-h-screen flex justify-center items-center my-20 md:my-4'>
         <LoginForm/>
     </div>
   )
