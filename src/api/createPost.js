@@ -3,7 +3,7 @@ import axios from 'axios';
 export const createPost = async (title, content, author) => {
   try {
     const response = await axios.post(
-      'http://localhost:3030/api/posts/add',
+      `${process.env.REACT_APP_BACKEND_HOST}/api/posts/add`,
       {
         title: title.trim(),
         content: content.trim(),

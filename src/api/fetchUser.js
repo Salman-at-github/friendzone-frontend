@@ -5,7 +5,7 @@ export const fetchUser = async()=>{
     
         const response = await axios({
           method: "GET",
-          url: 'http://localhost:3030/api/users/get',
+          url: `${process.env.REACT_APP_BACKEND_HOST}/api/users/get`,
           headers: {
             'Authorization': localStorage.getItem('token')
           }

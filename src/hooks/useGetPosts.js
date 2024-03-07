@@ -18,7 +18,6 @@ export default function useGetPosts(page = 1, limit = 5) {
       try {
         const response = await getPosts(page, limit);
 
-        console.log("Res is ======================== ", response.data.results)
         if (response.status === 401) {
           setUnauthorized(true);
           return;

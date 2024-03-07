@@ -37,7 +37,6 @@ const SignupForm = () => {
         showToast("success","Signed up successfully. Please login.")
         goTo("/login");
       } catch (error) {
-        console.log("ERRRRRRRRRRRRRRRR=== ",error.response.data.message)
         showToast('error',`Signup failed. ${error?.response.data.message}`)
       }
     });

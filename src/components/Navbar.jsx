@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-500 p-4 w-full relative z-[998]">
       <div className="flex items-center justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center select-none">
           <div className={`w-8 h-8 400 mr-2 overflow-hidden `}>
             <img src={logo} alt="Friend Zone logo" />
           </div>

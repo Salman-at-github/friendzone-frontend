@@ -36,7 +36,7 @@ const PostForm = () => {
   };
 
   return (
-    <div className="bg-white mx-auto mt-10 rounded-lg overflow-hidden shadow-md p-4 w-[90vw] md:w-[50vw] transition-transform duration-200 h-fit relative">
+    <div className="bg-white mx-auto mt-10 md:mt-16 rounded-lg overflow-hidden shadow-md p-4 w-[90vw] md:w-[50vw] transition-transform duration-200 h-fit relative">
       <h2 className="text-center my-6 text-2xl"> Create New Post</h2>
       <div className="border-b pb-8">
         <form onSubmit={handleSubmit}>

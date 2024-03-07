@@ -28,7 +28,7 @@ const Form = () => {
   const {setUser} = useGlobal()
 
   const showToast = useShowToast()
-
+  console.log('Back ===================== ',process.env.REACT_APP_BACKEND_HOST)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -45,7 +45,7 @@ const Form = () => {
             }
         }
     } catch (error) {
-      showToast("error",`Login Failed. ${error?.response.data.message}`)        
+      showToast("error",`Login Failed. ${error?.response.data.message || "Please try again later"}`)        
     }
   };
 

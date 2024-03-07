@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
+import {FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 import logo from '../assets/fzlogo.jpg'
 
 
@@ -22,17 +22,14 @@ const Footer = () => {
         <div className="order-3 md:order-0 flex justify-center items-center flex-col">
           <p className="text-lg font-semibold mb-4">Follow us</p>
           <div className="flex space-x-4">
-            <a href="/" className="text-2xl hover:scale-110 duration-300">
+            <a href="https://github.com/Salman-at-github" target="_blank" rel="noreferrer" className="text-2xl hover:scale-110 duration-300">
               <FaGithub />
             </a>
-            <a href="/" className="text-2xl hover:scale-110 duration-300">
-              <FaTwitter />
-            </a>
-            <a href="/" className="text-2xl hover:scale-110 duration-300">
-              <FaInstagram />
-            </a>
-            <a href="/" className="text-2xl hover:scale-110 duration-300">
+            <a href="https://www.linkedin.com/in/dev-salm/" target="_blank" rel="noreferrer" className="text-2xl hover:scale-110 duration-300">
               <FaLinkedin />
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="text-2xl hover:scale-110 duration-300">
+              <FaInstagram />
             </a>
           </div>
         </div>
