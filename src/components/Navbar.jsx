@@ -10,10 +10,10 @@ import useGetUser from "../hooks/useGetUser";
 
 const Navbar = () => {
   const {logout} = useGlobal(); //fetch user
-  const {user} = useGetUser()
+  const path = useLocation().pathname;
+  const {user} = useGetUser(path)
   const [isOpen, setIsOpen] = useState(false);
 
-  const path = useLocation().pathname;
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);

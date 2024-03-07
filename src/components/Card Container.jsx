@@ -1,6 +1,6 @@
 // CardContainer.js
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import useGetPosts from "../hooks/useGetPosts";
 import Loading from "./Loading";
@@ -11,6 +11,10 @@ import ErrorFallback from "./errors/ErrorFallback";
 
 const CardContainer = () => {
   const [pageNum, setPageNum] = useState(1);
+  const {topRef} = useGlobal()
+  useEffect(() => {
+    topRef.current.focus()
+  }, []);
 
   const { loading, error, posts, hasMore, unauthorized } = useGetPosts(pageNum);
 
@@ -49,7 +53,7 @@ const CardContainer = () => {
 
 
   return (
-    <>
+    <div ref={topRef}>
       <PostForm />
       <div className="grid grid-cols-1 md:grid-cols-2 px-4 gap-8 sm:px-20 py-20">
         {posts?.length > 0 ? (
@@ -69,7 +73,7 @@ const CardContainer = () => {
         )}
         {loading && <Loading />}
       </div>
-    </>
+    </div>
   );
   
 };

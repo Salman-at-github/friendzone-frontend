@@ -1,5 +1,5 @@
 // GlobalContext.js
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useRef, useState } from 'react';
 import { useShowToast } from '../hooks/useShowToast';
 
 const GlobalContext = createContext();
@@ -16,9 +16,11 @@ export const GlobalProvider = ({ children }) => {
     showToast('success',"Logged out")
   };
 
+  const topRef = useRef()
+  
 
   return (
-    <GlobalContext.Provider value={{ user, setUser, logout, posts, setPosts }}>
+    <GlobalContext.Provider value={{ user, setUser, logout, posts, setPosts, topRef }}>
       {children}
     </GlobalContext.Provider>
   );

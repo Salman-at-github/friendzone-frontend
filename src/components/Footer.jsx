@@ -1,11 +1,22 @@
 import React from "react";
 import {FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
+
 import logo from '../assets/fzlogo.jpg'
+import { useGlobal } from "../context/globalContext";
 
 
 const Footer = () => {
+
+  const {topRef} = useGlobal()
+
+  const scrollToTop = () =>{
+    topRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
-    <footer className="bg-blue-500 text-white p-8">
+    <footer className="bg-blue-500 text-white p-8 relative">
+      <FaArrowUp onClick={scrollToTop} title="Scroll Top" className="absolute top-5 right-5 md:right-[47%] md:-top-5 cursor-pointer hover:scale-110 text-2xl md:text-4xl"/>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
         {/* Logo */}
         <div className="flex items-center select-none">
