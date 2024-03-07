@@ -62,9 +62,9 @@ const CardContainer = () => {
           })
         ) : (
           !loading && (
-            <div>
-              <h2 className="text-2xl font-semibold text-center">No posts created</h2>
-            </div>
+            <>
+              <h2 className="text-2xl font-semibold">No posts created</h2>
+            </>
           )
         )}
         {loading && <Loading />}

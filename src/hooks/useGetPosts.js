@@ -3,7 +3,7 @@ import { getPosts } from '../api/fetchPosts';
 import { getCurrentTime } from '../utils/helpers';
 import { useGlobal } from '../context/globalContext';
 
-export default function useGetPosts(page = 1, limit = 5) {
+export default function useGetPosts(page = 1, limit = 6) {
   const [loading, setLoading] = useState(true);
   const [unauthorized, setUnauthorized] = useState(false);
   const [error, setError] = useState({});
@@ -22,7 +22,7 @@ export default function useGetPosts(page = 1, limit = 5) {
           setUnauthorized(true);
           return;
         }
-        setPosts(response.data.results); // Replace existing posts with new ones
+        setPosts(prev => [...prev, ...response.data.results]); // Replace existing posts with new ones
         setHasMore(page < response.data.totalPages);
         setLoading(false);
       } catch (e) {

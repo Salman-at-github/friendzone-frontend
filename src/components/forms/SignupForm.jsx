@@ -37,7 +37,7 @@ const SignupForm = () => {
         showToast("success","Signed up successfully. Please login.")
         goTo("/login");
       } catch (error) {
-        showToast('error',`Signup failed. ${error?.response.data.message}`)
+        showToast('error',`Signup failed. ${error?.response.data.message || "Please try again later."}`)
       }
     });
   };
@@ -132,7 +132,7 @@ const SignupForm = () => {
 
       {/* Submit Button */}
       <button
-      disabled={Object.values(errors).some((error) => error)}
+      disabled={Object.values(errors).some((error) => error) || formData.password !== formData.cpassword}
         type="submit"
         className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-400"
       >
