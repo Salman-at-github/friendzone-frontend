@@ -1,28 +1,39 @@
-import React, { useState } from "react";
-import { AiOutlineLike } from "react-icons/ai";
-import { FaRegCommentDots } from "react-icons/fa";
-import noDP from "../../assets/noDP.png";
-import { useGlobal } from "../../context/globalContext";
-import { FaVideo } from "react-icons/fa";
-import { FaPhotoVideo } from "react-icons/fa";
-import { MdEmojiEmotions } from "react-icons/md";
-import { createPost } from "../../api/createPost";
-import useGetPosts from "../../hooks/useGetPosts";
+import React, { useState } from 'react';
+import noDP from '../../assets/noDP.png';
+import { useGlobal } from '../../context/globalContext';
+import { FaVideo } from 'react-icons/fa';
+import { FaPhotoVideo } from 'react-icons/fa';
+import { MdEmojiEmotions } from 'react-icons/md';
+import { createPost } from '../../api/createPost';
+import useGetPosts from '../../hooks/useGetPosts';
+import { throttle } from '../../utils/helpers'; // Import the throttle function
+import { useShowToast } from '../../hooks/useShowToast';
 
 const PostForm = () => {
   const { user } = useGlobal();
-  const {addPostLocally} = useGetPosts()
+  const { addPostLocally } = useGetPosts();
 
-  const [title, setTitle] = useState('')
-  const [content,setContent ] = useState('')
-  
-  const handleSubmit = async(e)=>{
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const showToast = useShowToast();
+
+  // Throttle the handleSubmit function
+  const throttledSubmit = throttle(async () => {
+    try {
+      addPostLocally(title, content, user._id, user.name);
+      await createPost(title, content, user?.name || 'Anonymous');
+      setTitle('');
+      setContent('');
+      showToast('success',"Post created!")
+    } catch (error) {
+      showToast('error', `Encountered error: ${error?.response.data.message}`)
+    }
+  }, 3000); // Set the desired throttle delay (in milliseconds)
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-     addPostLocally(title, content, user._id)
-     createPost(title, content)
-    setTitle('')
-    setContent('')
-  }
+    throttledSubmit();
+  };
 
   return (
     <div className="bg-white mx-auto mt-10 rounded-lg overflow-hidden shadow-md p-4 w-[90vw] md:w-[50vw] transition-transform duration-200 h-fit relative">

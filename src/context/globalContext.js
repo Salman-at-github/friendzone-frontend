@@ -1,5 +1,6 @@
 // GlobalContext.js
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
+import { useShowToast } from '../hooks/useShowToast';
 
 const GlobalContext = createContext();
 
@@ -7,12 +8,12 @@ export const GlobalProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([])
 
-
+  const showToast = useShowToast() 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user')
     localStorage.removeItem('token')
-    // Implement any other logout logic (e.g., clearing the token)
+    showToast('success',"Logged out")
   };
 
 

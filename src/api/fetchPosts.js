@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getPosts = async (page = 1, limit = 5, signal, token) => {
+export const getPosts = async (page = 1, limit = 5, ) => {
   try {
     // Simulate a delay of 3 seconds
     await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -12,12 +12,10 @@ export const getPosts = async (page = 1, limit = 5, signal, token) => {
       headers: {
         'Authorization': localStorage.getItem('token')
       },
-      signal, // Attach the AbortSignal to the request
     });
 
-    console.log("Fetching ======================== ", response.data);
-    return response.data;
+    return response;
   } catch (error) {
-    throw error; // Throw the error for the calling hook to handle
+    return error;
   }
 };

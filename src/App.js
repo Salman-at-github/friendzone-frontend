@@ -8,7 +8,7 @@ import Signup from "./pages/Signup";
 function App() {
   return (
     <Router>
-      <div className="bg-gray-300">
+      <div className="h-screen md:h-auto">
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>   

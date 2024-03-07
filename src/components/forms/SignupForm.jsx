@@ -5,6 +5,7 @@ import { useFormValidation } from "../../hooks/useFormValidation";
 import { signupValidation } from "../../utils/validationRules";
 import { signup } from "../../api/signup";
 import useRedirect from "../../hooks/useRedirect";
+import { useShowToast } from "../../hooks/useShowToast";
 
 const SignupForm = () => {
   const initialState = {
@@ -26,24 +27,25 @@ const SignupForm = () => {
   };
 
   const {goTo} = useRedirect()
+  const showToast = useShowToast()
   const submitSignup = async (e) => {
     e.preventDefault();
   
     await handleSubmit(e, async (formData) => {
       try {
-        // Assuming signup is an asynchronous function that returns a promise
         await signup(formData);
+        showToast("success","Signed up successfully. Please login.")
         goTo("/login");
       } catch (error) {
-        // Handle errors, if any
-        console.error("Error during signup:", error);
+        console.log("ERRRRRRRRRRRRRRRR=== ",error.response.data.message)
+        showToast('error',`Signup failed. ${error?.response.data.message}`)
       }
     });
   };
 
   return (
     <form
-      className="max-w-md mx-auto p-8 bg-white rounded shadow-md mt-8"
+      className="md:min-w-[500px] p-8 bg-white rounded shadow-md my-10"
       onSubmit={submitSignup}
     >
       <h2 className="text-2xl font-semibold mb-6 text-center">Sign Up</h2>

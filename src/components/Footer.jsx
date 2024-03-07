@@ -1,17 +1,21 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
+import logo from '../assets/fzlogo.jpg'
+
 
 const Footer = () => {
   return (
     <footer className="bg-blue-500 text-white p-8">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
         {/* Logo */}
-        <div className="flex items-center order-1 md:order-0">
-          <div className="w-8 h-8 bg-gray-400 mr-2"></div>
-          <span className="text-lg font-semibold tracking-wider">Your Logo</span>
+        <div className="flex items-center select-none">
+          <div className={`w-8 h-8 400 mr-2 overflow-hidden `}>
+            <img src={logo} alt="Friend Zone logo" />
+          </div>
+          <span className="text-2xl font-bold">Friend</span><span className="text-2xl font-bold text-red-400 ">Zone</span>
         </div>
 
-        <p className="text-sm order-2 md:order-0">&copy; 2024 Your Company. All rights reserved.</p>
+        <p className="text-sm order-2 md:order-0 select-none">&copy; 2024 FriendZone. All rights reserved.</p>
 
 
         {/* Follow Us */}
@@ -19,7 +23,7 @@ const Footer = () => {
           <p className="text-lg font-semibold mb-4">Follow us</p>
           <div className="flex space-x-4">
             <a href="/" className="text-2xl hover:scale-110 duration-300">
-              <FaFacebook />
+              <FaGithub />
             </a>
             <a href="/" className="text-2xl hover:scale-110 duration-300">
               <FaTwitter />

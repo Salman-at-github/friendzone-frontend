@@ -10,8 +10,6 @@ export const fetchUser = async()=>{
             'Authorization': localStorage.getItem('token')
           }
         });
-        console.log(response.data)
-        console.log("Statuu =========================== ",response.status)
         return response.data;
       } catch (error) {
         throw error; // Throw the error for the calling hook to handle

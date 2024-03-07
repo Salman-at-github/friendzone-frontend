@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CardContainer from "../components/Card Container";
-import PostForm from "../components/forms/PostForm";
 import useRedirect from "../hooks/useRedirect";
 
 
@@ -15,10 +14,9 @@ const Home = () => {
     }
   },[])
   return (
-    <>
-      <PostForm />
+    <div className="md:min-h-screen">
       <CardContainer />
-    </>
+    </div>
   );
 };
 

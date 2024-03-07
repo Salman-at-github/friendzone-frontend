@@ -6,7 +6,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { formatTimeDistance } from "../utils/helpers";
 import noDP from '../assets/noDP.png';
 
-const Card = forwardRef(({ title, createdAt, content, user }, ref) => {
+const Card = forwardRef(({ title, createdAt, content,author, user }, ref) => {
   const body = (
     <div className="bg-white rounded-lg overflow-hidden shadow-md p-4 w-full hover:scale-[102%] transition-transform duration-200 h-fit relative">
       <BsThreeDots
@@ -21,7 +21,7 @@ const Card = forwardRef(({ title, createdAt, content, user }, ref) => {
         />
         <div>
           <h3 className="text-lg font-semibold text-gray-800">
-            {user?.name ? user.name : "Anonymous"}
+            {author ? author : "Anonymous"}
           </h3>
           <div className="flex justify-start items-center">
             <p className="font-normal text-gray-600 mr-2">

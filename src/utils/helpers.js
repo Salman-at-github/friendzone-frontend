@@ -39,6 +39,17 @@ export const debounce = (func, delay = 1000) => {
   };
 };
 
+export const throttle = (func, delay) => {
+  let lastCall = 0;
+  return function (...args) {
+    const now = new Date().getTime();
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      func(...args);
+    }
+  };
+};
+
 export const generateRandomId = (length = 8) => {
   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let randomId = '';

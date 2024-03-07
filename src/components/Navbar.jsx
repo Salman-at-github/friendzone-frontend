@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import noDP from '../assets/noDP.png';
 import logo from '../assets/fzlogo.jpg'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { useGlobal } from "../context/globalContext";
-import { fetchUser } from "../api/fetchUser";
 import useGetUser from "../hooks/useGetUser";
 
 
@@ -14,13 +13,17 @@ const Navbar = () => {
   const {user} = useGetUser()
   const [isOpen, setIsOpen] = useState(false);
 
+  const path = useLocation().pathname;
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
+  //close menu on route change
+  useEffect(()=>{
+    setIsOpen(false);
+  },[path])
 
-console.log("user is ======================== ",localStorage.getItem('user'))
   return (
     <nav className="bg-blue-500 p-4 w-full relative z-[998]">
       <div className="flex items-center justify-between">
@@ -28,7 +31,7 @@ console.log("user is ======================== ",localStorage.getItem('user'))
           <div className={`w-8 h-8 400 mr-2 overflow-hidden `}>
             <img src={logo} alt="Friend Zone logo" />
           </div>
-          <span className="text-2xl font-bold">Friend</span><span className="text-2xl font-bold text-yellow-400 ">Zone</span>
+          <span className="text-2xl font-bold">Friend</span><span className="text-2xl font-bold text-red-400 ">Zone</span>
         </div>
 
         <FaBars

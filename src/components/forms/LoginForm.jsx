@@ -4,6 +4,7 @@ import { login } from "../../api/login";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchUser } from "../../api/fetchUser";
 import { useGlobal } from "../../context/globalContext";
+import { useShowToast } from "../../hooks/useShowToast";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -26,6 +27,8 @@ const Form = () => {
 
   const {setUser} = useGlobal()
 
+  const showToast = useShowToast()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,11 +40,12 @@ const Form = () => {
             if(gotUser){
               setUser(gotUser)
               localStorage.setItem('user',gotUser)
+              showToast("success","Logged in successfully")
               navigateTo("/")
             }
         }
     } catch (error) {
-        throw error
+      showToast("error",`Login Failed. ${error?.response.data.message}`)        
     }
   };
 
