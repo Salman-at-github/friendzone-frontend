@@ -28,7 +28,6 @@ const Form = () => {
   const {setUser} = useGlobal()
 
   const showToast = useShowToast()
-  console.log('Back ===================== ',process.env.REACT_APP_BACKEND_HOST)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
